@@ -1,0 +1,67 @@
+<ngx-spinner></ngx-spinner>
+<h3>{{ !edit ? 'Create' : 'Edit' }} User</h3>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field appearance="fill">
+      <input
+        required
+        formControlName="name"
+        matInput
+        type="text"
+        placeholder="Name"
+      />
+    </mat-form-field>
+  </div>
+  <div *ngIf="name.invalid && name.touched">
+    <p class="error"><small>The name is required</small></p>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <input
+        required
+        formControlName="surname"
+        matInput
+        type="text"
+        placeholder="Surname"
+      />
+    </mat-form-field>
+  </div>
+  <div *ngIf="surname.invalid && surname.touched">
+    <p class="error"><small>The surname is required</small></p>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <input
+        required
+        formControlName="age"
+        matInput
+        type="number"
+        min="1"
+        max="120"
+        placeholder="Age"
+      />
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="age.invalid && age.touched">
+    <p class="error"><small>The age is required</small></p>
+  </div>
+  <div *ngIf="age.errors && age.errors.min">
+    <p class="error"><small>The min age is 1</small></p>
+  </div>
+  <div *ngIf="age.errors && age.errors.max">
+    <p class="error"><small>The max age is 120</small></p>
+  </div>
+  <div class="button-container">
+    <button
+      [disabled]="userForm.invalid"
+      class="mr"
+      mat-raised-button
+      color="primary"
+      type="submit"
+    >
+      ok
+    </button>
+    <button (click)="close()" mat-raised-button color="warm">cancel</button>
+  </div>
+</form>
